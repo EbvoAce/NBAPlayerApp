@@ -1,0 +1,42 @@
+<div>
+<mat-sidenav-container class="example-container " >
+  <p>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button matTooltip="Menu button" class="example-icon"  (click)= "searchDrawer.toggle()" aria-label="Example icon-button with menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        <span>NBA Player Watch</span>
+      </mat-toolbar-row>
+  
+      <mat-toolbar-row>
+        <span>{{title}}</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)='shareclick()'>
+          <mat-icon>share</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  <h1></h1>
+   <mat-sidenav #searchDrawer  mode="over">
+    <mat-nav-list>
+      <h2>Menu</h2>
+      <a mat-list-item routerLink="search"   (click)="searchDrawer.toggle()"><mat-icon></mat-icon>Player Search</a> 
+      <a mat-list-item (click)="HistoryDrawer.open()"><mat-icon></mat-icon> History</a> 
+      <a mat-list-item routerLink="home" (click)="searchDrawer.toggle()"><mat-icon></mat-icon>Home</a>
+   </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav #HistoryDrawer mode="over" position="end"><h2>Player Search History</h2>
+    <p *ngFor="let player of database.getplayers(); let i = index" (click)="deleteplayer(i)">
+      {{player}}
+    </p>
+    <div><button  mat-raised-button color="warn" (click)="HistoryDrawer.toggle()">Back</button></div>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+  <br>
+
+  <router-outlet (activate)="TitleChange($event.pageTitle)"></router-outlet>
+</mat-sidenav-container>
+</div>
+

@@ -1,0 +1,50 @@
+<form [formGroup]="entryGroup" (ngSubmit)="onSubmit($event)">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Search NBA PLayer</mat-label>
+      <input [formControl] = "PlayerName" matInput placeholder="EX. Kyle Lowry">
+      <mat-error *ngIf="PlayerName.hasError('required')">please type in a name</mat-error>
+      <mat-error *ngIf="PlayerName.hasError('maxlength')">please type in a name below 30 charaters </mat-error>
+    </mat-form-field>
+    <div><button type="submit" mat-raised-button color="warn">Search</button></div>
+    <div *ngFor="let player of playerbase">
+      <table class="results">
+          <tr>
+              <td>
+                <h2>First Name: {{player.first_name}}</h2>
+              </td>
+          </tr>
+          <tr>
+              <td>
+              <h2>Last Name: {{player.last_name}}</h2>    
+              </td>
+          </tr>
+          <tr>
+            <td>
+            <h2>Position: {{player.position}}</h2>    
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <h2>Team: {{player.team.full_name}}</h2>    
+            </td>
+        </tr>
+        <ng-container *ngIf= "playerstats != null">
+        <tr>
+            <td>
+            <h2>Points: {{playerstats.pts}}</h2>    
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <h2>Assist: {{playerstats.ast}}</h2>    
+            </td>
+        </tr>
+    </ng-container>
+      </table>  
+        
+    </div>
+    <img id="greek" src="assets/greekfreak.svg">
+</form>
+    
+
+  
